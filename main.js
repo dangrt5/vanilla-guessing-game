@@ -30,9 +30,9 @@ class GuessingGame {
         let result = "";
 
         if (inputValue < this.randomNumber) {
-            result = "Too Low";
+            result = "❄️";
         } else if (inputValue > this.randomNumber) {
-            result = "Too High";
+            result = "🔥";
         } else {
             result = "Correct!";
         }
