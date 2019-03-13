@@ -30,13 +30,15 @@ class GuessingGame {
         let result = "";
 
         if (inputValue < this.randomNumber) {
-            result = "❄️";
+            result = "Too Low";
         } else if (inputValue > this.randomNumber) {
-            result = "🔥";
+            result = "Too High";
         } else {
             result = "Correct!";
         }
         resultText.textContent = result;
+
+        document.querySelector("#guess-input").value = "";
         this.addToHistory(inputValue, resultText.textContent);
     }
 
