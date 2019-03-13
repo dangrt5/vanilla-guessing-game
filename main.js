@@ -14,7 +14,7 @@ class GuessingGame {
     }
 
     randomizeNumber = () => {
-        this.randomNumber = Math.floor((Math.random() * 10000) + 1);
+        this.randomNumber = Math.floor((Math.random() * 100) + 1);
     }
 
     applyHandlers = () => {
@@ -37,6 +37,11 @@ class GuessingGame {
         }
 
         resultText.textContent = result;
+    }
 
+    resetButtonHandler = e => {
+        e.preventDefault();
+        document.querySelector("#guess-input").value = "";
+        document.querySelector(".result").textContent = "";
     }
 }
