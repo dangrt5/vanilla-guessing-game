@@ -23,10 +23,11 @@ class GuessingGame {
     }
 
     submitButtonHandler = e => {
+        e.preventDefault();
         let inputValue = parseInt(document.querySelector("#guess-input").value);
+        if (!inputValue) return;
         let resultText = document.querySelector(".result");
         let result = "";
-        e.preventDefault();
 
         if (inputValue < this.randomNumber) {
             result = "Too Low";
@@ -35,13 +36,24 @@ class GuessingGame {
         } else {
             result = "Correct!";
         }
-
         resultText.textContent = result;
+        this.addToHistory(inputValue, resultText.textContent);
     }
 
     resetButtonHandler = e => {
         e.preventDefault();
         document.querySelector("#guess-input").value = "";
         document.querySelector(".result").textContent = "";
+        document.querySelector(".all-history").innerHTML = "";
+        this.randomizeNumber();
     }
+
+    addToHistory = (value, result) => {
+        if (!value || !result) return;
+        const historyText = document.createElement("h3");
+        historyText.classList.add("text-center");
+        historyText.textContent = `${value} - ${result}`;
+        document.querySelector(".all-history").appendChild(historyText);
+    }
+
 }
