@@ -1,31 +1,42 @@
 window.onload = () => {
-    init();
+    const guessingGame = new GuessingGame;
+    guessingGame.init();
 }
 
-function init() {
-    domCreate();
-    assignRandomPokeball();
-    applyHandlers();
-}
+class GuessingGame {
+    constructor() {
+        this.randomNumber = null;
+    }
 
-function domCreate() {
-    for (let i = 0; i < 4; i++) {
-        const pokeball = document.createElement("img");
-        pokeball.classList.add("pokeball");
-        pokeball.src = "images/pokeball.png";
-        document.querySelector('.pokeballs .col').appendChild(pokeball);
+    init = () => {
+        this.randomizeNumber();
+        this.applyHandlers();
+    }
+
+    randomizeNumber = () => {
+        this.randomNumber = Math.floor((Math.random() * 10000) + 1);
+    }
+
+    applyHandlers = () => {
+        document.querySelector("#submit-button").addEventListener("click", this.submitButtonHandler);
+        document.querySelector("#reset-button").addEventListener("click", this.resetButtonHandler);
+    }
+
+    submitButtonHandler = e => {
+        let inputValue = parseInt(document.querySelector("#guess-input").value);
+        let resultText = document.querySelector(".result");
+        let result = "";
+        e.preventDefault();
+
+        if (inputValue < this.randomNumber) {
+            result = "Too Low";
+        } else if (inputValue > this.randomNumber) {
+            result = "Too High";
+        } else {
+            result = "Correct!";
+        }
+
+        resultText.textContent = result;
 
     }
 }
-
-function assignRandomPokeball() {
-
-}
-
-function applyHandlers() {
-    const pokeballs = document.querySelectorAll(".pokeball");
-    pokeballs.forEach(pokeball => {
-        
-    })
-}
-
